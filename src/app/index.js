@@ -3,11 +3,12 @@
  */
 
 import React from 'react';
+//import { Button } from 'react-bootstrap';
 import { render } from 'react-dom';
 
 import { Header } from "./components/Header";
 import { TodoList } from "./components/TodoList";
-
+import {CreateTodo} from './components/createTodo';
 const todos=[
     {
         task:'Task1',
@@ -34,9 +35,22 @@ export class App extends React.Component {
     render() {
         return (
            <div><Header />
-            <TodoList todos={this.state.todos}/>
+               <CreateTodo todos={this.state.todos} createTask={this.createTask.bind(this)}/>
+               <TodoList todos={this.state.todos}/>
+
             </div>
         );
+    }
+
+    createTask(task) {
+        console.log('<<<<<>>>>>>>'+task);
+        this.state.todos.push({
+            task,
+            isCompleted: false
+
+        });
+
+        this.setState({todos:this.state.todos});
     }
 
 }

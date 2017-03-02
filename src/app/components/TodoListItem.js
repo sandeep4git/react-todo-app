@@ -5,7 +5,6 @@
 import React from 'react';
 
 export class TodoListItem extends React.Component {
-
     constructor(props){
         super(props);
 
@@ -15,15 +14,19 @@ export class TodoListItem extends React.Component {
     }
 
     renderActionsSection(){
+        const buttonStyle={
+            'marginLeft':'10px',
+
+        };
         if(this.state.isEditing){
             return(
                 <span>
-                    <button type="button" className="btn btn-default" onClick={this.onCancelClick.bind(this)}>
-                        <span className="glyphicon glyphicon-save"></span>
+                    <button type="button" className="btn btn-danger pull-right" style={buttonStyle}>
+                       Cancel
                     </button>
 
-                    <button type="button" className="btn btn-default">
-                       Cancel
+                    <button type="button" className="btn btn-success pull-right" onClick={this.onCancelClick.bind(this)} style={buttonStyle}>
+                        {/*<span className="glyphicon glyphicon-save"></span>*/} Save
                     </button>
                 </span>
 
@@ -32,12 +35,12 @@ export class TodoListItem extends React.Component {
 
             return(
                 <span>
-                    <button type="button" className="btn btn-default" onClick={this.onEditClick.bind(this)}>
-                        <span className="glyphicon glyphicon-edit"></span>
+                    <button type="button" className="btn btn-danger pull-right" style={buttonStyle}>
+                        {/*<span className="glyphicon glyphicon-remove"></span>*/} Delete
                     </button>
 
-                    <button type="button" className="btn btn-default">
-                        <span className="glyphicon glyphicon-remove"></span>
+                    <button type="button" className="btn btn-warning pull-right" onClick={this.onEditClick.bind(this)} style={buttonStyle}>
+                        {/*<span className="glyphicon glyphicon-edit"></span>*/} Edit
                     </button>
                 </span>
             );
@@ -45,10 +48,16 @@ export class TodoListItem extends React.Component {
     }
 
      render() {
+         const optionsStyle={
+             'margin':'10px',
+             'align':'right',
+             'color':'red'
+         };
          return (
              <div className="container">
-                 <h3>{this.props.task}{this.renderActionsSection()}</h3>
 
+                 <h3>{this.props.task}<span style={optionsStyle}>{this.renderActionsSection()}</span></h3>
+                 <hr/>
              </div>
          );
      }
